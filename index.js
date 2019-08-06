@@ -1,9 +1,13 @@
+const logger = require('./logger');
+const authenticate = require('./authenticate');
 const express = require('express');
 const Joi = require('@hapi/joi');
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(logger);
+app.use(authenticate);
 
 const genres = [
     {id: 1, name: "first genre"},
