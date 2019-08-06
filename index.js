@@ -1,3 +1,4 @@
+const config = require('config');
 const logger = require('./logger');
 const authenticate = require('./authenticate');
 const express = require('express');
@@ -7,6 +8,11 @@ const Joi = require('@hapi/joi');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Configuration
+// You can use env variables that are mapped via config settings
+console.log('Application Name: ' + config.get('name'));
+console.log('Mail Server: ' + config.get('mail.host'));
+console.log('Mail Server Password: ' + config.get('mail.password'));
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 // console.log(`app: ${app.get('env')}`); // dev if NODE_ENV not defined
 
