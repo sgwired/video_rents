@@ -1,3 +1,5 @@
+const startupDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db');
 const config = require('config');
 const logger = require('./logger');
 const authenticate = require('./authenticate');
@@ -27,9 +29,15 @@ app.use(authenticate);
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
-    console.log('Morgan enabled....');
+    // console.log('Morgan enabled....');
+    // have to pass DEBUG=startup
+    startupDebugger('Morgan enabled...');
 }
 
+// Db work have to pass DEBUG=db
+dbDebugger('Connected to the database');
+
+// For multiple db messages export DEBUG=app:startup,app:db or app:*
 
 const genres = [
     {id: 1, name: "first genre"},
