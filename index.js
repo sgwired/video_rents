@@ -18,6 +18,8 @@ console.log('Mail Server Password: ' + config.get('mail.password'));
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 // console.log(`app: ${app.get('env')}`); // dev if NODE_ENV not defined
 
+app.set('view engine', 'pug');
+app.set('views', './views'); // default - optional
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); // key=vale&key=value and poplates req.body
@@ -47,7 +49,8 @@ const genres = [
 
 
 app.get('/', (req, res) => {
-    res.send('Hello world!');
+    // res.send('Hello world!');
+    res.render('index', {title: 'My express app', message: 'Hello world!'});
 });
 
 app.get('/api/genres', (req, res) => {
