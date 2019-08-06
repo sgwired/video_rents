@@ -1,11 +1,18 @@
 const logger = require('./logger');
 const authenticate = require('./authenticate');
 const express = require('express');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const Joi = require('@hapi/joi');
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true})); // key=vale&key=value and poplates req.body
+app.use(express.static('public'));
+app.use(helmet());
+app.use(morgan('tiny'));
+
 app.use(logger);
 app.use(authenticate);
 
