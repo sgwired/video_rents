@@ -7,14 +7,23 @@ const Joi = require('@hapi/joi');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+// console.log(`app: ${app.get('env')}`); // dev if NODE_ENV not defined
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); // key=vale&key=value and poplates req.body
 app.use(express.static('public'));
 app.use(helmet());
-app.use(morgan('tiny'));
-
+// app.use(morgan('tiny'));
 app.use(logger);
 app.use(authenticate);
+
+if (app.get('env') === 'development') {
+    app.use(morgan('tiny'));
+    console.log('Morgan enabled....');
+}
+
 
 const genres = [
     {id: 1, name: "first genre"},
