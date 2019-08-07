@@ -27,10 +27,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true})); // key=vale&key=value and poplates req.body
 app.use(express.static('public'));
 app.use(helmet());
-app.use('/api/genres', genres);
-app.use('/', main);
+
 app.use(logger);
 app.use(authenticate);
+app.use('/api/genres', genres);
+app.use('/', main);
+
+
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
